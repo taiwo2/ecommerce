@@ -1,0 +1,95 @@
+.header {
+  height: 6.5rem;
+  box-shadow: 0 2px 4px 0 rgb(0,0,0.1);
+
+  .wrap {
+    position: relative;
+    max-width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+
+    .logo {
+      width: 200px;
+      position: absolute;
+      top: 50%; left: 10px;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      transform: translateY(-50%);
+
+      img {
+        display: block;
+        height: 5rem;
+        width: 100%;
+        margin: 0;
+      }
+    }
+
+    nav{
+      display: block;
+      width: 100%;
+      padding: 0;
+      height: 100%;
+      margin: 0;
+
+      ul,ul li{
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        ul{
+          text-align: center;
+          li {
+            display: inline-block;
+            margin:  0 ;
+            list-style-type: none;
+            
+
+            a{
+              font-size: 1.8rem;
+              line-height: 6.5rem;
+              text-decoration: none;
+              vertical-align: middle;
+              color: black;
+              text-transform: uppercase;
+              text-decoration: none;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+    .callToAction {
+      position: absolute;
+      top: 50%; right: 10px;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      transform: translateY(-50%);
+
+      ul, li {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style-type: none;
+        display: inline-block;
+        margin-right: 10px ;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      a {
+        font-size: 1.8rem;
+        line-height: 1;
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+      }
+    }
+
+  }
+}
