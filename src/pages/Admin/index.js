@@ -1,12 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import FormInput from '../../components/Forms/FormInput/FormInput';
-import Button from '../../components/Forms/Button/Button';
-import Modal from '../../Modal';
+import FormInput from '../../component/Forms/FormInput/FormInput';
+import Button from '../../component/Forms/Button/Button';
+// import Modal from '../../Modal';
+import Modal from '../../component/Modal';
 import './style.scss';
-import { addProductStart, fetchProductStart,deleteProductStart} from '../../Redux/Product/ProductAction';
-import FormSelect from '../../components/Forms/FormSelect';
-import CKEditor from 'ckeditor4-react'
+import { addProductStart, fetchProductStart,deleteProductStart} from '../../redux/Product/ProductAction';
+import FormSelect from '../../component/Forms/FormSelect';
+// import CKEditor from 'ckeditor4-react'
 const mapState = ({ productData }) => ({
   products: productData.products
 });
@@ -33,7 +35,7 @@ const Admin = props => {
 
  
 useEffect(() => {
-fetchProductStart()
+dispatch(fetchProductStart())
 },[])
 
 const resetForm = () => {
@@ -53,7 +55,7 @@ const resetForm = () => {
         productName,
         productThumbnail,
         productPrice,
-        productDesc,
+        // productDesc,
       })
     );
     resetForm();
@@ -121,9 +123,9 @@ const resetForm = () => {
               onChange={e => setProductPrice(e.target.value)}
             />
 
-            <CKEditor
+            {/* <CKEditor
               onChange={evt => setProductDesc(evt.editor.getData())}
-            />
+            /> */}
 
             <br />
 
@@ -137,7 +139,7 @@ const resetForm = () => {
 
       <div className="manageProducts">
 
-        {/* <table border="0" cellPadding="0" cellSpacing="0">
+        <table border="0" cellPadding="0" cellSpacing="0">
           <tbody>
             <tr>
               <th>
@@ -155,7 +157,7 @@ const resetForm = () => {
                         productName,
                         productThumbnail,
                         productPrice,
-                        documentID
+                        documentId
                       } = product;
 
                       return (
@@ -167,10 +169,11 @@ const resetForm = () => {
                             {productName}
                           </td>
                           <td>
-                            £{productPrice}
+                            {/* £ */}
+                            $ {productPrice}
                           </td>
                           <td>
-                            <Button onClick={() => dispatch(deleteProductStart(documentID))}>
+                            <Button onClick={() => dispatch(deleteProductStart(documentId))}>
                               Delete
                             </Button>
                           </td>
@@ -192,9 +195,9 @@ const resetForm = () => {
                   <tbody>
                     <tr>
                       <td>
-                        {!isLastPage && (
+                        {/* {!isLastPage && (
                           <LoadMore {...configLoadMore} />
-                        )}
+                        )} */}
                       </td>
                     </tr>
                   </tbody>
@@ -202,7 +205,7 @@ const resetForm = () => {
               </td>
             </tr>
           </tbody>
-        </table> */}
+        </table>
 
       </div>
 

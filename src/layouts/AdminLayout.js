@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Header from '../components/Header/Header';
-import VerticalNav from '../components/VerticalNav';
-import Footer from '../components/Footer/Footer';
-import { signOutUserStart } from '../Redux/User/userAction';
-
+import Header from '../component/Header/Header';
+import VerticalNav from '../component/VerticalNav';
+import Footer from '../component/Footer/Footer';
+import { signOutUserStart } from '../redux/user/userAction';
 
 const AdminLayout = props => {
   const dispatch = useDispatch();
@@ -27,7 +26,9 @@ const AdminLayout = props => {
                 </Link>
               </li>
               <li>
-                <span className="signOut" onClick={() => signOut()}>
+                <span className="signOut" 
+                onClick={() => signOut()}
+                >
                   Sign Out
                 </span>
               </li>

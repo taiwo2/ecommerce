@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from '../components/Footer/Footer'
-import Header from '../components/Header/Header'
+import Footer from '../component/Footer/Footer'
+import Header from '../component/Header/Header'
 
 const Mainlayout = (props) => {
   return (
@@ -8,8 +8,9 @@ const Mainlayout = (props) => {
       <Header {...props}/>
       <div className='main'>
       {props.children}
-      <Footer />
+      
       </div>
+      <Footer />
     </div>
   )
 }

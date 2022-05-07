@@ -2,17 +2,50 @@ import React,{useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Button from '../Forms/Button/Button';
 import FormInput from '../Forms/FormInput/FormInput';
-
+import AuthWrapper from '../AuthWrapper/Authwrapper';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import './signin.scss';
+import { emailSignInStart,signInWithGoogle,resetAuth} from '../../redux/user/userAction';
 
+const mapState = ({user}) => ({
+  currentUser: user.currentUser
+})
 const Sigin = (props) => {
+  const {currentUser} = useSelector(mapState)
   const [email,setEmail] = useState('')
   const [password,setPassWord] = useState('')
-  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const reset = () => {
+    setEmail('')
+    setPassWord('')
+  }
 
+  useEffect(() =>{
+    if(currentUser){
+      reset();
+      // dispatch(resetAuth());
+    navigate('/')
+    }
+  },[currentUser])
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  dispatch(emailSignInStart({email,password}))
+}
+
+const handleSignInGoogle = () => {
+  dispatch(signInWithGoogle())
+}
+const configLogin = {
+  headline: 'login'
+}
   return (
+    <>
+    <AuthWrapper {...configLogin}>
       <div className='formWrap'>
-        <form >
+        <form onSubmit={handleSubmit}>
           <FormInput 
             type='email'
             name='email'
@@ -30,7 +63,7 @@ const Sigin = (props) => {
           <Button type='submit'>login</Button>
           <div className='socialwrap'>
             <div className='row'>
-              <Button >
+              <Button onClick={handleSignInGoogle}>
                 Sign in with Google
               </Button>
             </div>
@@ -40,6 +73,8 @@ const Sigin = (props) => {
           </div>
         </form>
       </div>
+    </AuthWrapper>
+      </>
   )
 }
 

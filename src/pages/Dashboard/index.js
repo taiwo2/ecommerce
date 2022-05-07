@@ -3,7 +3,7 @@ import React from 'react'
 const Dashboard = () => {
   return (
     <div>
-      you are login in
+      <h2>you are login in</h2>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductResult from '../../components/ProductResult'
-const index = () => {
+import ProductResult from '../../component/ProductResult'
+const Search = () => {
   return (
   <div>
     <ProductResult />
@@ -8,4 +8,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Search;
