@@ -1,22 +1,22 @@
 import React,{ useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { addCart } from '../../Redux/Cart/CartAction'
-import { fetchProductStart, setProducts } from '../../Redux/Product/ProductAction'
-import Button from './Forms/Button/Button'
+import { useParams,useNavigate } from 'react-router-dom'
+import { addCart } from '../../redux/Cart/CartAction'
+import { fetchProductDetails, setProducts } from '../../redux/Product/ProductAction'
+import Button from '../Forms/Button/Button'
+import './styles.scss'
 
 const mapState = state =>({
-  product: state.productsData.product
+  product: state.productData.product
 })
 const ProductCard = ({}) => {
   const {product} = useSelector(mapState)
   const {productID} = useParams();
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {productName,productThumbnail,productPrice,productDesc} = product
   useEffect(() => {
-    fetchProductStart(productID)
+    dispatch(fetchProductDetails(productID))
 
     return () => {
       dispatch(
@@ -30,7 +30,7 @@ const ProductCard = ({}) => {
     dispatch(
       addCart(product)
     )
-    history.push('./cart')
+    navigate('/cart')
   }
   const configAddButton = {
     type: 'button'
@@ -54,7 +54,9 @@ const ProductCard = ({}) => {
           </li>
           <li>
            <div className='addtocart'>
-            <Button {...configAddButton} onClick={() => handleAddTocart(product)}>
+            <Button {...configAddButton} 
+            onClick={() => handleAddTocart(product)}
+            >
               Add to Cart
             </Button>
            </div>

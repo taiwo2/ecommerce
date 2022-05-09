@@ -4,9 +4,16 @@ import thunk from 'redux-thunk'
 import createSagaMiddleware from "@redux-saga/core";
 import RootReducer from "./RootReducer";
 import RootSaga from "./RootSaga";
+import {persistStore} from 'redux-persist'
 const sagaMiddleware = createSagaMiddleware()
 export const middlewares = [sagaMiddleware, thunk,logger] ;
 
-const store = createStore(RootReducer,applyMiddleware(...middlewares))
-sagaMiddleware.run(RootSaga)
-export default store;
+export const store = createStore(RootReducer,applyMiddleware(...middlewares))
+sagaMiddleware.run(RootSaga);
+
+export const persistor = persistStore(store)
+
+// export default {
+//   store,
+//   persitor
+// }

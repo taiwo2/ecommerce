@@ -5,12 +5,15 @@ import {Link} from 'react-router-dom'
 import { auth } from '../../firebase/utils';
 import { useSelector,useDispatch } from 'react-redux';
 import { signOutUserStart } from '../../redux/user/userAction';
-const mapState = ({user}) => ({
-currentUser: user.currentUser
+import { selectCartItemsCount } from '../../redux/Cart/CartSelector';
+
+const mapState = (state) => ({
+currentUser: state.user.currentUser,
+totalCount: selectCartItemsCount(state)
 })
 
 const Header = (props) => {
- const {currentUser} =useSelector(mapState);
+ const {currentUser,totalCount} =useSelector(mapState);
  const dispatch = useDispatch();
 
  const signOut = () => {
@@ -41,43 +44,37 @@ const Header = (props) => {
         </nav>
 
         <div className='callToAction'>
-        {currentUser && (
-              <ul>
-              <li>
-                <Link to={'/dashboard'}>
-                  Dashboard
-                </Link>
-            </li>
-              <li>
-              <span onClick={() => signOut()}>
-              Logout
-              </span>
-                
-            </li>
-            </ul>
-            )}
-          {!currentUser && (
-            <ul>
-              <li>
+        <ul>
+          <li>
+            <Link to='/cart'>
+              Your Cart ({totalCount})
+            </Link>
+          </li>
+          {currentUser && [
+            <li>
               <Link to={'/dashboard'}>
-                Dashboard
-             </Link>
-            </li>
+                My Account
+              </Link>
+            </li>,
+            <li>
+              <span onClick={() => signOut()}>
+                Logout
+              </span> 
+            </li>    
+          ]}
+           {!currentUser && [
               <li>
               <Link to={'/registration'}>
                 Register
              </Link>
-            </li>
+            </li>,
             <li>
               <Link to={'/login'}>
                 Login
              </Link>
             </li>
-            </ul>
-          )}
-            
-              
-          
+          ]}
+         </ul>
         </div>
       </div>
     </header>

@@ -1,15 +1,15 @@
-import { ADD_CART, REMOVE_CART } from "./CartTypes";
+import * as types from "./CartTypes";
 
 export const addCart = nextItem => ({
-  type: ADD_CART,
+  type: types.ADD_TO_CART,
   payload: nextItem
 })
 
 export const removeCart = cartItem => ({
-  type: REMOVE_CART,
+  type: types.REMOVE_CART,
   payload: cartItem
 })
 export const reduceCart = cartItem => ({
-  type: REMOVE_CART,
+  type: types.REDUCE_CART_ITEM,
   payload: cartItem
 })

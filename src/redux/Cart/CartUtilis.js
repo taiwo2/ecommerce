@@ -1,28 +1,24 @@
-export const existingItem = ({
-  prevCartItems,
-  nextCartitems
-}) => {
- return prevCartItems.find(prev => prev.documentID === nextCartitems.documentID)
+export const existingItem = ({ prevCartItems,nextCartItems }) => {
+  return prevCartItems.find(cartItems => cartItems.documentId === nextCartItems.documentId)
 }
-export const handleAddToCart = ({
-  prevCartItems,
-  nextCartitems
-}) => {
-   const quantityItem= 1,
-   const cartItemExist = existingItem({prevCartItems,nextCartitems});
+export const handleAddToCart = ({prevCartItems,nextCartItems}) => {
+ const quantityItem = 1;
 
-   if (cartItemExist){
-     return prevCartItems.map(cartItem => cartItem.documentID === nextCartitems.documentID
+ const cartItemExist = existingItem({prevCartItems,nextCartItems});
+
+  if (cartItemExist) {
+    return prevCartItems.map(cartItems => cartItems.documentId == nextCartItems.documentId
       ? {
-        ...cartItem,
-        quantity: cartItem.quantity + quantityItem
-      } : cartItem
-      )
-   }
+        ...cartItems,
+        quantity: cartItems.quantity + quantityItem
+      }
+      :cartItems
+    )
+  }
   return [
     ...prevCartItems,
     {
-      ...nextCartitems,
+      ...nextCartItems,
       quantity: quantityItem
     }
   ]
@@ -30,19 +26,19 @@ export const handleAddToCart = ({
 
 export const handleRemoveCart = ({ prevCartItems,
   removeCartItems}) => {
- return prevCartItems.filter(item.documentID !== removeCartItems.documentID)
+ return prevCartItems.filter(item => item.documentId !== removeCartItems.documentId)
 }
 
-export const handleReduceCartItem = ({prevCartItems,
-  cartItemToReduce})  => {
+export const handleReduceCartItem = ({prevCartItems, cartItemToReduce})  => {
   const exitingCartItem = prevCartItems.find(cart => 
-    cart.documentID != cartItemToReduce.documentID);
+    cart.documentId === cartItemToReduce.documentId);
 
-  if (existingItem.quantity === 1) {
-    return prevCartItems.filter(prev => prev.documentID = existingItem.documentID)
+  if (exitingCartItem .quantity === 1) {
+    return prevCartItems.filter(prev => prev.documentId !== exitingCartItem .documentId)
   }
 
-  return prevCartItems.map(cartItem => 
-    cartItem .documentId === existingItem.documentID ? {...cartItem,quantity: cartItem.quantity - 1}
+  return prevCartItems.map(cartItem => cartItem.documentId === exitingCartItem .documentId 
+    ? {...cartItem,
+      quantity: cartItem.quantity - 1}
       : cartItem)
 }

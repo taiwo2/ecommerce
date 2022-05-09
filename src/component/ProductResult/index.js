@@ -6,7 +6,7 @@ import { useSelector,useDispatch  } from 'react-redux';
 import Product from './Product';
 import FormSelect from '../Forms/FormSelect';
 import { useNavigate } from 'react-router-dom';
-
+import LoadMore from '../LoadMore';
 import { useParams } from 'react-router-dom';
 
 const mapState = ({ productData }) => ({
@@ -58,16 +58,16 @@ const ProductResult = () => {
     handleChange: handlefilter
   }
 
-  // const handleLoadMore = () => {
-  //   dispatch(fetchProductStart({
-  //     filterType, 
-  //     startAfterDocs: queryDoc,
-  //     persistproducts: data
-  //   }))
-  // }
-  // const configLoadMore = {
-  //   onLoadMoreEvt: handleLoadMore,
-  // }
+  const handleLoadMore = () => {
+    dispatch(fetchProductStart({
+      filterType, 
+      startAfterDocs: queryDoc,
+      persistproducts: data
+    }))
+  }
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
+  }
   return( 
   <div className='products'>
     <h1>Browse  Product</h1>
@@ -84,13 +84,13 @@ const ProductResult = () => {
       return (
           // <div key={pos}>
             <Product {...configProduct}/>
-          /* </div> */
+          // </div> 
       )
     })}
    </div>
-   {/* {!isLastPage && (
-//  <LoadMore {...configLoadMore}/>
-   )} */}
+   {!isLastPage && (
+ <LoadMore {...configLoadMore}/>
+   )}
     
   </div>
   );

@@ -61,19 +61,19 @@ export const handleDeleteProduct = documentID => {
   });
 }
 
-export const handleFetchProducts = (productID) => {
-  new Promise((resolve,reject)  => [
+export const handleFetchProducts = productID => {
+  return new Promise((resolve,reject)  => {
     firestore
-      .collection('product')
+      .collection('products')
       .doc(productID)
       .get()
       .then(snapshot => {
-        if (snapshot.exist) {
-          resolve(snapshot.data)
+        if (snapshot.exists) {
+          resolve(snapshot.data())
         }
       })
       .catch(err=> {
         reject(err)
       })
-  ])
+  })
 }

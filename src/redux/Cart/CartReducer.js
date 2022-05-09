@@ -1,19 +1,19 @@
-import { ADD_CART, REMOVE_CART } from "./CartTypes"
-import { handleAddToCart, handleRemoveCart } from "./CartUtilis"
+import * as types from "./CartTypes"
+import {handleAddToCart,handleReduceCartItem,handleRemoveCart } from './CartUtilis'
 const initiate = {
   cartItems: []
 }
- const cartReducer = (state,action) => {
+ const cartReducer = (state=initiate,action) => {
    switch (action.type) {
-     case ADD_CART:
+     case types.ADD_TO_CART:
        return {
-        ...state,
-        cartItems: handleAddToCart({
-          prevCartItem: state.cartItems,
-          nextCartItem: action.payload
-        })
+         ...state,
+         cartItems: handleAddToCart({
+          prevCartItems: state.cartItems,
+          nextCartItems: action.payload
+         })
        }
-      case REMOVE_CART:
+      case types.REMOVE_CART:
         return {
           ...state,
           cartItems: handleRemoveCart({
@@ -21,8 +21,16 @@ const initiate = {
             removeCartItems: action.payload
           })
         }
+      case types.REDUCE_CART_ITEM:
+        return {
+          ...state,
+          cartItems: handleReduceCartItem({
+            prevCartItems: state.cartItems, 
+            cartItemToReduce: action.payload
+          })
+        }
      default:
-    return state
+      return state
    }
  }
 

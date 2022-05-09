@@ -23,7 +23,8 @@ import Admin from './pages/Admin';
 import Search from './pages/Search';
 import { checkusersuccess } from './redux/user/userAction';
 import AdmintoolBar from './component/AdminToolBar';
-
+import ProductDetails from './component/ProductDetails';
+import Cart from './pages/Cart'
 const App  = (props) => {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -72,6 +73,16 @@ const App  = (props) => {
           <Route exact  path='/search/:filterType' element={
            <Mainlayout>
             <Search/>
+            </Mainlayout>
+          }/>
+          <Route   path='/product/:productID' element={
+           <Mainlayout>
+            <ProductDetails />
+            </Mainlayout>
+          }/>
+          <Route   path='/cart' element={
+           <Mainlayout>
+            <Cart />
             </Mainlayout>
           }/>
           <Route exact  path='/dashboard' element={

@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard'
 const ProductDetail = () => {
   return (
     <div>
-    <ProductCard />
+    <ProductCard /> 
       </div>
   )
 }

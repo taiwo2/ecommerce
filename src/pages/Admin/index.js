@@ -8,7 +8,11 @@ import Modal from '../../component/Modal';
 import './style.scss';
 import { addProductStart, fetchProductStart,deleteProductStart} from '../../redux/Product/ProductAction';
 import FormSelect from '../../component/Forms/FormSelect';
-// import CKEditor from 'ckeditor4-react'
+// import {CKEditor} from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import LoadMore from '../../component/LoadMore'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const mapState = ({ productData }) => ({
   products: productData.products
 });
@@ -23,7 +27,7 @@ const Admin = props => {
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState('');
 
- const {data} = products
+ const {data,isLastPage,queryDoc} = products
  
 
   const toggleModal = () => setHideModal(!hideModal);
@@ -55,15 +59,22 @@ const resetForm = () => {
         productName,
         productThumbnail,
         productPrice,
-        // productDesc,
+        productDesc,
       })
     );
     resetForm();
 
   };
 
-
-
+  const handleLoadMore = () => {
+    dispatch(fetchProductStart({
+      startAfterDocs: queryDoc,
+      persistproducts: data
+    }))
+  }
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
+  }
   
 
   return (
@@ -86,7 +97,7 @@ const resetForm = () => {
             <h2>
               Add new product
             </h2>
-
+            
             <FormSelect
               label="Category"
               options={[{
@@ -122,11 +133,10 @@ const resetForm = () => {
               value={productPrice}
               onChange={e => setProductPrice(e.target.value)}
             />
-
-            {/* <CKEditor
-              onChange={evt => setProductDesc(evt.editor.getData())}
-            /> */}
-
+            <ReactQuill theme="snow" 
+            value={productDesc} 
+            onChange={setProductDesc}/>
+             
             <br />
 
             <Button type="submit">
@@ -195,9 +205,9 @@ const resetForm = () => {
                   <tbody>
                     <tr>
                       <td>
-                        {/* {!isLastPage && (
+                        {!isLastPage && (
                           <LoadMore {...configLoadMore} />
-                        )} */}
+                        )}
                       </td>
                     </tr>
                   </tbody>

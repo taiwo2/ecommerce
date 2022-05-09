@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from '../Forms/Button'
+import Button from '../Forms/Button/Button';
 const LoadMore = ({onLoadMoreEvt = () => {}}) => {
   return (
   <div>
-    <Button onClick={onLoadMoreEvt()}>
+    <Button onClick={() => onLoadMoreEvt()}>
     Load More
     </Button>
   </div>
